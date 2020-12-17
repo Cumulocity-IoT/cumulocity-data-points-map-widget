@@ -1,0 +1,11 @@
+{
+  "name": "gp-data-points-map",
+  "version": "1.0.0",
+  "description": "The Data points Map widget help you to display measurements and device locations on map.",
+  "author": "Darpankumar Lalani - Software AG, Global Presales",
+  "license": "Apache 2.0",
+  "peerDependencies": {
+    "@angular/common": "^8.2.0",
+    "@angular/core": "^8.2.0"
+  }
+}

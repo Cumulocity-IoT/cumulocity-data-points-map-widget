@@ -1,0 +1,16 @@
+<div (resized)="onResized($event)" class="datapoints-map-root">
+  <div #dpInfoRef>
+    <div class="dp-map-header-bar">
+      <div class="dp-map-header">
+        <button type="button" class="btn btn-link c8y-realtime" title="Toggle realtime" (click)="toggleRealTime()">
+          <span [ngClass]="realtime?'c8y-pulse active' : 'c8y-pulse inactive'"></span>
+          <span>Realtime</span>
+        </button>
+        <button mat-icon-button style="color:#1776BF;" type="button" class="button" (click)="refresh()"><span
+            class="fa fa-refresh"></span></button>
+      </div>
+    </div>
+  </div>
+  <mat-progress-bar *ngIf="isBusy" mode="indeterminate"></mat-progress-bar>
+  <div #dpmapRef [style.height.px]="height" [style.width.px]="width"></div>
+</div>

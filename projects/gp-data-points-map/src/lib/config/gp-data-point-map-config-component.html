@@ -1,0 +1,106 @@
+<div >
+    <c8y-form-group>
+        <div class="row col-sm-12">
+            <div class="col-sm-12 form-horizontal">
+                <label class="datapoint-map-label-bottom">Configuration</label>
+            </div>
+        </div>
+        <mat-progress-bar *ngIf="isBusy" mode="indeterminate"></mat-progress-bar>
+        <div *ngIf="!isBusy">
+            <div class="row">
+                <div class="col-sm-12 form-horizontal">
+               <!--  <label for="smartSwitch" class=" col-sm-4 control-label">Smart Switch:</label> -->
+                  <div class="col-sm-6 ">
+                    <div class="datapoint-map-slide-toggle datapoint-map-input-width">
+                      <mat-slide-toggle class="col-sm-12 datapoint-map-slide-toggle-margin" [checked]="config.isClusterMap"
+                        [(ngModel)]="config.isClusterMap" >
+                        Cluster Map
+                      </mat-slide-toggle>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12 ">
+                    <label for="Measurements" class=" col-sm-4 control-label">Select Measurement:</label>
+                    <div class="col-sm-8 ">
+                        <select  [(ngModel)]="config.measurementType" 
+                        name="MeasurementType" id="MeasurementType">
+                            <option *ngFor="let measurementType of config.measurementTypeList"
+                            [ngValue]='measurementType'
+                            [attr.selected]="config.measurementType.description === measurementType.description ? true : null">
+                                {{measurementType.description}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="appId">
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                      <label for="dashboardField" class=" col-sm-4 control-label">Dashboard Field:</label>
+                      <div class="col-sm-8">
+                        <input type="text" [(ngModel)]="config.dashboardField" id="dashboardField" class="form-control"
+                          placeholder="deviceListDynamicDashboards.dashboardId(Optional)">
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div *ngIf="appId ">
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                      <label for="tabGroupField" class=" col-sm-4 control-label">TabGroup Field:</label>
+                      <div class="col-sm-8">
+                        <input type="text" [(ngModel)]="config.tabGroupField" id="tabGroupField" class="form-control"
+                          placeholder="deviceListDynamicDashboards.tabGroup(Optional)">
+                      </div>
+                    </div>
+                </div>
+              </div>
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <label class=" col-sm-4 control-label">Default Zoom:</label>
+                    <div class="col-sm-8">
+                    <div class="col-sm-4">
+                        <mat-slide-toggle class="datapoint-map-slide-toggle-margin" [checked]="config.isOutdoorAutoZoom"
+                        [(ngModel)]="config.isOutdoorAutoZoom" (change)="outdoorAutoChanges($event)">
+                        Auto
+                        </mat-slide-toggle>
+                    </div>
+                    <div class="col-sm-8" *ngIf="!config.isOutdoorAutoZoom">
+                        <mat-slider [max]="21" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1"
+                            [(ngModel)]="config.outdoorZoom">
+                        </mat-slider>
+                    </div>
+                    </div>
+                </div>
+            </div>
+             <div class="form-group row col-sm-12 datapoint-map-row-padding ">
+                <label class=" col-sm-4 control-label">Marker Color: </label>
+                    <div class="col-sm-4 ">
+                     <input type="text" id="markerColor" name="markerColor"
+                         [(ngModel)]="config.markerColor" (click)="openColorPicker()"
+                         placeholder="Color code i.e #0899CC or leave blank for default colors">
+                    </div>
+                    <div class="col-sm-4 ">
+                     <app-color-picker [ngClass]="isOpenCP? 'colorPickerModal': 'hideColorPicker'"
+                         (closeColorPicker)="closeColorPicker()" (colorSet)="setSelectedColor($event)">
+                     </app-color-picker>
+                 </div>
+            </div>
+            <div class="form-group row col-sm-12 datapoint-map-row-padding ">
+                <label class=" col-sm-4 control-label">Marker Font Color: </label>
+                    <div class="col-sm-4 ">
+                     <input type="text" id="markerFontColor" name="markerFontColor"
+                         [(ngModel)]="config.markerFontColor" (click)="openFontColorPicker()"
+                         placeholder="Color code i.e #0899CC or leave blank for default colors">
+                    </div>
+                    <div class="col-sm-4 ">
+                     <app-color-picker [ngClass]="isOpenFontCP? 'colorPickerModal': 'hideColorPicker'"
+                         (closeColorPicker)="closeFontColorPicker()" (colorSet)="setSelectedFontColor($event)">
+                     </app-color-picker>
+                 </div>
+            </div>
+        </div>
+
+    </c8y-form-group>
+</div>

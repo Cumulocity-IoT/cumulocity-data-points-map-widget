@@ -1,0 +1,27 @@
+.datapoint-map-input-width {
+    width: 100%;
+}
+
+.datapoint-map-slide-toggle {
+    display: flex;
+}
+
+.datapoint-map-slide-toggle-margin {
+    margin: 10px;
+}
+
+.datapoint-map-slide-toggle-margin .mat-slide-toggle-label {
+    display: flex !important;
+}
+.datapoint-map-label-bottom {
+    border-bottom: 1px solid #dfe3e4;
+}
+.hideColorPicker {
+    display: none !important;
+}
+.datapoint-map-row-padding {
+    padding-top: 15px;
+}
+.mat-slider-horizontal{
+    width: 100%;
+}

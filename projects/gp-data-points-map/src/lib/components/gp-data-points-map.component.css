@@ -1,0 +1,15 @@
+.datapoints-map-root {
+  height: 100%;
+  width: 100%;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+.dp-map-header-bar {
+  display: flex;
+  padding: 5px;
+}
+
+.dp-map-header {
+  margin-left: auto;
+}
