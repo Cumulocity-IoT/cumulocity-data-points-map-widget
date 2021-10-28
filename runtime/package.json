@@ -1,8 +1,8 @@
 {
-  "name": "datapoints-runtime-widget",
+  "name": "datapoints-map-runtime-widget",
   "interleave": {
-    "dist\\bundle-src\\custom-widget.js": "datapoints-runtime-widget-CustomWidget",
-    "dist/bundle-src/custom-widget.js": "datapoints-runtime-widget-CustomWidget"
+    "dist\\bundle-src\\custom-widget.js": "datapoints-map-runtime-widget-CustomWidget",
+    "dist/bundle-src/custom-widget.js": "datapoints-map-runtime-widget-CustomWidget"
   },
   "version": "2.0.0",
   "description": "Runtime package.json for library widget (written by Software AG Global Presales)",
