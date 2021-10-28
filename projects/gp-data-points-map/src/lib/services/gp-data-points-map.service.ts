@@ -19,7 +19,7 @@ import { isDevMode, Injectable } from '@angular/core';
 import {
   InventoryBinaryService, InventoryService, IManagedObject,
   IResultList, MeasurementService, IResult, IManagedObjectBinary,
-  EventService, ObservableList, IMeasurement, RealtimeAction, IFetchOptions, FetchClient
+  EventService, IMeasurement, IFetchOptions, FetchClient
 } from '@c8y/client';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { C8yPosition } from './../interfaces/c8y.position';
@@ -137,7 +137,7 @@ export class GpDataPointsMapService {
   }
 
     // tslint:disable-next-line:max-line-length
-    getLastMeasurementForSource(sourceId: string, dateFrom: string, dateTo: string, type: string, series: string): Observable<IMeasurement[]> {
+    getLastMeasurementForSource(sourceId: string, dateFrom: string, dateTo: string, type: string, series: string): Promise<IResultList<IManagedObject>> {
         const msmtFilter = {
             pageSize: 1,
             valueFragmentSeries: series,
@@ -145,14 +145,17 @@ export class GpDataPointsMapService {
             dateFrom,
             dateTo,
             revert: true,
+            source: sourceId
            // type
         };
-        const realtimeOps = {
-            realtime: true,
-            realtimeAction: RealtimeAction.CREATE
-        };
-        // tslint:disable-next-line: deprecation
-        return this.msmtSvc.listBySource$(sourceId, msmtFilter, realtimeOps);
+        
+        return new Promise(
+          (resolve) => {
+              this.msmtSvc.list(msmtFilter)
+                  .then((resp: any) => {
+                     resolve(resp);
+                  })
+          });
     }
 
   /**

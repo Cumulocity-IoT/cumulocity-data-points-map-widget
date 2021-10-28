@@ -32,7 +32,6 @@ import {
 import { ResizedEvent } from 'angular-resize-event';
 import {
   InventoryService,
-  RealtimeAction,
   IManagedObject,
   MeasurementService,
   Realtime,
@@ -154,7 +153,7 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
     this.mapDiv = this.mapDivRef.nativeElement;
     this.mapInfosDiv = this.mapInfosDivRef.nativeElement;
 
-    this.deviceId = '126'; // '23227199' ;// '23121787';
+    this.deviceId = '154724'; // '23227199' ;// '23121787';
     this.measurementType = {
       name: 'T', // 'PM25',
       type: 'temperature_measurement',
@@ -239,7 +238,7 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
   private clearSubscriptions() {
     if (this.allSubscriptions) {
       this.allSubscriptions.forEach((s) => {
-        if (s.type === 'Measurements') {
+        if (s.type === 'Measurements' || s.type === 'Realtime') {
           this.realTimeService.unsubscribe(s.subs);
         } else {
           s.subs.unsubscribe();
@@ -331,90 +330,85 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
    * render single device on map based on its position
    */
   private addSingleDeviceToMap(device: any): void {
-    const realtimeOps = {
-      realtime: true,
-      realtimeAction: RealtimeAction.UPDATE,
-    };
+ 
     if (
       device &&
       device.c8y_Position &&
       device.c8y_Position.lat &&
       device.c8y_Position.lng
     ) {
-      // REALTIME ------------------------------------------------------------------------
-      // tslint:disable-next-line: deprecation
-      const imoDetail = this.inventoryService.detail$(device.id, realtimeOps);
-      const detailSubs = imoDetail.subscribe(
-        (data) => {
-          if (true) {
-            data = data[0];
+     
+      // check if this marker has already been created... and has an altitude as well to indicate its floor
+      // if no position is given, no update is done
+      if (device && device.c8y_Position) {
+        if (this.allMarkers[device.id]) {
+          this.updateMarkerPosition(device);
+        } else {
+          let mapBounds = null;
+          if (!device.c8y_Position.alt) {
+            device.c8y_Position.alt = 0;
           }
-          // check if this marker has already been created... and has an altitude as well to indicate its floor
-          // if no position is given, no update is done
-          if (data && data.c8y_Position) {
-            if (this.allMarkers[data.id]) {
-              this.updateMarkerPosition(data);
+          const aMarker = this.createMarker(device);
+          this.allMarkers[device.id] = aMarker;
+          if (!mapBounds) {
+            mapBounds = new L.LatLngBounds(
+              aMarker.getLatLng(),
+              aMarker.getLatLng()
+            );
+          } else {
+            mapBounds.extend(aMarker.getLatLng());
+          }
+          let fgOnLvl = this.featureGroup.find(
+            (i) => i.name === device.c8y_Position.alt
+          );
+          const markers = L.markerClusterGroup();
+          if (!fgOnLvl) {
+            if (this.isClusterMap) {
+              markers.addLayer(aMarker);
+              fgOnLvl = {
+                name: Number(device.c8y_Position.alt),
+                layer: L.featureGroup([markers]),
+              };
+              L.setOptions(fgOnLvl.layer, { name: device.c8y_Position.alt });
             } else {
-              let mapBounds = null;
-              if (!data.c8y_Position.alt) {
-                data.c8y_Position.alt = 0;
-              }
-              const aMarker = this.createMarker(data);
-              this.allMarkers[data.id] = aMarker;
-              if (!mapBounds) {
-                mapBounds = new L.LatLngBounds(
-                  aMarker.getLatLng(),
-                  aMarker.getLatLng()
-                );
-              } else {
-                mapBounds.extend(aMarker.getLatLng());
-              }
-              let fgOnLvl = this.featureGroup.find(
-                (i) => i.name === data.c8y_Position.alt
-              );
-              const markers = L.markerClusterGroup();
-              if (!fgOnLvl) {
-                if (this.isClusterMap) {
-                  markers.addLayer(aMarker);
-                  fgOnLvl = {
-                    name: Number(data.c8y_Position.alt),
-                    layer: L.featureGroup([markers]),
-                  };
-                  L.setOptions(fgOnLvl.layer, { name: data.c8y_Position.alt });
-                } else {
-                  fgOnLvl = {
-                    name: Number(data.c8y_Position.alt),
-                    layer: L.featureGroup([aMarker]),
-                  };
-                  L.setOptions(fgOnLvl.layer, { name: data.c8y_Position.alt });
-                }
-                this.featureGroup.push(fgOnLvl);
-              } else {
-                if (this.isClusterMap) {
-                  markers.addLayer(aMarker);
-                  fgOnLvl.layer.addLayer(markers);
-                } else {
-                  fgOnLvl.layer.addLayer(aMarker);
-                }
-              }
-              this.addLayerToMap(mapBounds);
+              fgOnLvl = {
+                name: Number(device.c8y_Position.alt),
+                layer: L.featureGroup([aMarker]),
+              };
+              L.setOptions(fgOnLvl.layer, { name: device.c8y_Position.alt });
+            }
+            this.featureGroup.push(fgOnLvl);
+          } else {
+            if (this.isClusterMap) {
+              markers.addLayer(aMarker);
+              fgOnLvl.layer.addLayer(markers);
+            } else {
+              fgOnLvl.layer.addLayer(aMarker);
             }
           }
-        },
-        (err) => {
-          if (isDevMode()) {
-            console.log('+-+- got an error with the device observable ', err);
-          }
+          this.addLayerToMap(mapBounds);
+        }
+      }
+
+       // REALTIME ------------------------------------------------------------------------
+      // tslint:disable-next-line: deprecation
+      const manaogedObjectChannel = `/managedobjects/${device.id}`;
+      const detailSubs = this.realTimeService.subscribe(
+        manaogedObjectChannel,
+        (resp) => {
+          
+          const data = (resp.data ? resp.data.data : {});
+          this.updateMarkerPosition(data);
         }
       );
       if (this.realtime) {
         this.allSubscriptions.push({
           id: device.id,
           subs: detailSubs,
-          type: 'device',
+          type: 'Realtime',
         });
       } else {
-        detailSubs.unsubscribe();
+        this.realTimeService.unsubscribe(detailSubs);
       }
     }
   }
@@ -427,10 +421,6 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
     if (deviceList && deviceList.length === 1) {
       this.addSingleDeviceToMap(deviceList[0]);
     } else {
-      const realtimeOps = {
-        realtime: true,
-        realtimeAction: RealtimeAction.UPDATE,
-      };
       const categoryFeatureGroups = [];
       let mapBounds = this.defaultBounds;
       const markers = L.markerClusterGroup();
@@ -463,25 +453,22 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
               } else {
                 categoryFeatureGroups.push(aMarker);
               }
-              // tslint:disable-next-line: deprecation
-              const imoDetail = this.inventoryService.detail$(
-                imo.id,
-                realtimeOps
-              );
-              const detailSubs = imoDetail.pipe(skip(1)).subscribe((mobj) => {
-                mobj = mobj[0];
-                this.updateMarkerPosition(mobj);
+              const manaogedObjectChannel = `/managedobjects/${imo.id}`;
+              const detailSubs = this.realTimeService.subscribe(
+                manaogedObjectChannel,
+                (resp) => {
+                  const mobj = (resp.data ? resp.data.data : {});
+                  this.updateMarkerPosition(mobj);
               });
               if (this.realtime) {
                 this.allSubscriptions.push({
                   id: imo.id,
                   subs: detailSubs,
-                  type: 'device',
+                  type: 'Realtime',
                 });
               } else {
-                detailSubs.unsubscribe();
+                  this.realTimeService.unsubscribe(detailSubs);
               }
-              // }
             } catch (error) {
               if (isDevMode()) {
                 console.log(
@@ -701,30 +688,29 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
    * Get mesurements for all devices
    */
   private getMeasurements() {
-    this.allDeviceList.forEach((device) => {
-      this.getLastMeasurement(device.id, this.measurementType.type, this.measurementType.name);
+    this.allDeviceList.forEach(async (device) => {
+      await this.getLastMeasurement(device.id, this.measurementType.type, this.measurementType.name);
     });
   }
   /**
    * Get Last measurements for given device id. Measurement will be look upto last 30 days
    */
-  private getLastMeasurement(sourceId, type, series) {
+  private async getLastMeasurement(sourceId, type, series) {
     const now = moment();
-    const observedMeasures = this.dpService.getLastMeasurementForSource(
+    const response =  ( await this.dpService.getLastMeasurementForSource(
       sourceId,
       now.add(-30, 'days').format('YYYY-MM-DD'),
       now.add(31, 'days').format('YYYY-MM-DD'),
       type,
       series
-    );
+    )) as any;
 
-    const measurementSubs = observedMeasures.subscribe((data) => {
-      if (data.length > 0 ) {
+      if (response && response.data.length > 0 ) {
         const marker = this.allMarkers[sourceId];
         if (marker) {
           this.hideDeviceOnMap(sourceId);
           const icon = marker.getIcon();
-          const msmt = data[0];
+          const msmt = response.data[0];
           if (
             msmt &&
             msmt[this.measurementType.type] &&
@@ -753,12 +739,10 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
             oldFeatureGroup.layer.addLayer(marker);
           }
           if (this.realtime) {
-            this.realtTimeMeasurements(sourceId, RealtimeAction.CREATE);
+            this.realtTimeMeasurements(sourceId);
           }
         }
       }
-      measurementSubs.unsubscribe();
-    });
   }
 
   /**
@@ -786,7 +770,7 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
   /**
    * Subscripton for realtime measurements for given source id
    */
-  private realtTimeMeasurements(sourceId, realtimeAction) {
+  private realtTimeMeasurements(sourceId) {
     const measurementChannel = `/measurements/${sourceId}`;
     const realTimeMeasurementSub = this.realTimeService.subscribe(
       measurementChannel,
@@ -794,7 +778,6 @@ export class GpDataPointsMapComponent implements OnInit, AfterViewInit {
         if (response && response.data) {
           const measurementData = response.data;
           if (
-            measurementData.realtimeAction === realtimeAction &&
             measurementData.data
           ) {
             const msmt = measurementData.data;
