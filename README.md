@@ -28,7 +28,7 @@ The Data Points Map widget help you to display measurements and device locations
   
 ### Runtime Widget Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/1.0.0/datapoints-runtime-widget-1.0.0.zip) and follow runtime deployment instructions from [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/1.0.0/datapoints-runtime-widget-1.0.0.zip) and use application builder to install your runtime widget.
   
 
 ### Installation of widget through Appbuilder or Cockipt Deployment?
