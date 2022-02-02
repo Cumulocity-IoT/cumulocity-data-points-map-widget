@@ -16,13 +16,8 @@
  * limitations under the License.
  */
 import { NgModule } from '@angular/core';
-import {
-  MatButtonModule,
-  MatProgressBarModule,
-  MatRadioModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-} from '@angular/material';
+import {MatSliderModule} from '@angular/material/slider';
+
 import { CoreModule, HOOK_COMPONENTS } from '@c8y/ngx-components';
 import { GpDataPointsMapConfigComponent } from './config/gp-data-point-map-config-component';
 import { GpDataPointsMapComponent } from './components/gp-data-points-map.component';
@@ -47,11 +42,7 @@ import { ColorPaletteComponent } from './color-picker/color-palette/color-palett
   ],
   imports: [
     CoreModule,
-    MatProgressBarModule,
-    MatButtonModule,
-    MatSlideToggleModule,
-    MatSliderModule,
-    MatRadioModule,
+   // MatSliderModule,
     AngularResizedEventModule,
   ],
   exports: [

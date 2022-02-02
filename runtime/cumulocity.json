@@ -1,7 +1,7 @@
 {
   "name": "Data points map Runtime Widget",
-  "contextPath": "datapoints-runtime-widget",
-  "key": "datapoints-runtime-widget-application-key",
+  "contextPath": "datapoints-map-runtime-widget",
+  "key": "datapoints-map-runtime-widget-application-key",
   "contentSecurityPolicy": "default-src 'self'",
   "icon": {
     "class": "fa fa-map-pin"

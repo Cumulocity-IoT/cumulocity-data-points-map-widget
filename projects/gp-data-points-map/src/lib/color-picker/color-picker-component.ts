@@ -65,4 +65,9 @@ export class ColorPickerComponent {
 
     return '#' + r + g + b + a;
   }
+
+  changeType(e: any) {
+    this.colorType = e.target.value;
+
+  }
 }

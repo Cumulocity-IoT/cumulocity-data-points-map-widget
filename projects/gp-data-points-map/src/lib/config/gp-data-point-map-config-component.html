@@ -5,17 +5,18 @@
                 <label class="datapoint-map-label-bottom">Configuration</label>
             </div>
         </div>
-        <mat-progress-bar *ngIf="isBusy" mode="indeterminate"></mat-progress-bar>
+        <div style="text-align: center;"><c8y-loading *ngIf="isBusy"></c8y-loading></div>
         <div *ngIf="!isBusy">
             <div class="row">
                 <div class="col-sm-12 form-horizontal">
                <!--  <label for="smartSwitch" class=" col-sm-4 control-label">Smart Switch:</label> -->
                   <div class="col-sm-6 ">
                     <div class="datapoint-map-slide-toggle datapoint-map-input-width">
-                      <mat-slide-toggle class="col-sm-12 datapoint-map-slide-toggle-margin" [checked]="config.isClusterMap"
-                        [(ngModel)]="config.isClusterMap" >
-                        Cluster Map
-                      </mat-slide-toggle>
+                      <label class="c8y-switch ">
+                        <input type="checkbox" [checked]="config.isClusterMap" 
+                        [(ngModel)]="config.isClusterMap">
+                        <span></span> Cluster Map
+                      </label>
                     </div>
                   </div>
               </div>
@@ -61,15 +62,14 @@
                     <label class=" col-sm-4 control-label">Default Zoom:</label>
                     <div class="col-sm-8">
                     <div class="col-sm-4">
-                        <mat-slide-toggle class="datapoint-map-slide-toggle-margin" [checked]="config.isOutdoorAutoZoom"
-                        [(ngModel)]="config.isOutdoorAutoZoom" (change)="outdoorAutoChanges($event)">
-                        Auto
-                        </mat-slide-toggle>
+                        <label class="c8y-switch ">
+                            <input type="checkbox"  [checked]="config.isOutdoorAutoZoom" 
+                            [(ngModel)]="config.isOutdoorAutoZoom" (change)="outdoorAutoChanges($event)"> 
+                            <span></span> Auto
+                          </label>
                     </div>
-                    <div class="col-sm-8" *ngIf="!config.isOutdoorAutoZoom">
-                        <mat-slider [max]="21" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1"
-                            [(ngModel)]="config.outdoorZoom">
-                        </mat-slider>
+                    <div class="col-sm-8" style="margin-top: 5px;"  *ngIf="!config.isOutdoorAutoZoom">
+                         <input id="outdoorZoomRange" type="range" min="1" max="21" step="1" [(ngModel)]="config.outdoorZoom"/>
                     </div>
                     </div>
                 </div>

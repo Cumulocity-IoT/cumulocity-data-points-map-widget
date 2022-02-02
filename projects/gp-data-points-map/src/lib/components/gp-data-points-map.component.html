@@ -6,11 +6,10 @@
           <span [ngClass]="realtime?'c8y-pulse active' : 'c8y-pulse inactive'"></span>
           <span>Realtime</span>
         </button>
-        <button mat-icon-button style="color:#1776BF;" type="button" class="button" (click)="refresh()"><span
-            class="fa fa-refresh"></span></button>
+        <button style="color:#1776BF;margin-right: 5px;" type="button" class="btn btn-clean" (click)="refresh()"><i c8yIcon="refresh"></i></button>
       </div>
     </div>
   </div>
-  <mat-progress-bar *ngIf="isBusy" mode="indeterminate"></mat-progress-bar>
+  <div style="text-align: center;margin-top: 50px;" *ngIf="isBusy"><c8y-loading ></c8y-loading></div>
   <div #dpmapRef [style.height.px]="height" [style.width.px]="width"></div>
 </div>
