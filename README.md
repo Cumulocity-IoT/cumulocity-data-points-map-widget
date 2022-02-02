@@ -1,6 +1,6 @@
   
 
-# Data Points Map Widget for Cumulocity[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/1.0.0/datapoints-runtime-widget-1.0.0.zip)
+# Data Points Map Widget for Cumulocity[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/2.0.0/datapoints-runtime-widget-2.0.0.zip)
 
   
 The Data Points Map widget help you to display measurements and device locations on map.
@@ -28,7 +28,7 @@ The Data Points Map widget help you to display measurements and device locations
   
 ### Runtime Widget Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/1.0.0/datapoints-runtime-widget-1.0.0.zip) and use application builder to install your runtime widget.
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/2.0.0/datapoints-runtime-widget-2.0.0.zip) and use application builder to install your runtime widget.
   
 
 ### Installation of widget through Appbuilder or Cockipt Deployment?
@@ -82,7 +82,7 @@ The Data Points Map widget help you to display measurements and device locations
     npm i angular-resize-event@1.1.1 fontawesome@4.7.2 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@^1.6.0 @angular/material@8.2.3 leaflet.markercluster@1.4.1
 
     ```
-2. Grab the Data Points Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/1.0.0/gp-data-points-map-1.0.0.tgz)**.
+2. Grab the Data Points Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/2.0.0/gp-data-points-map-2.0.0.tgz)**.
 
 
 3. Install the Binary file in app builder.
@@ -93,7 +93,7 @@ The Data Points Map widget help you to display measurements and device locations
 
     ```
 
-4. Copy datapoints-map.less file [from here](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/1.0.0/datapoints-map.less) and paste it at /cumulocity-app-builder/ui-assets/
+4. Copy datapoints-map.less file [from here](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/2.0.0/datapoints-map.less) and paste it at /cumulocity-app-builder/ui-assets/
 
 5. Open index.less located at /cumulocity-app-builder/ui-assets/
 
@@ -170,7 +170,7 @@ The Data Points Map widget help you to display measurements and device locations
 
     ```
 
-2. Grab the Data Points Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/1.0.0/gp-data-points-map-1.0.0.tgz)**
+2. Grab the Data Points Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/2.0.0/gp-data-points-map-2.0.0.tgz)**
 
 3. Install the Binary file in your project.
 
@@ -180,7 +180,7 @@ The Data Points Map widget help you to display measurements and device locations
 
     ```
 
-4. Copy datapoints-map.less file [from here](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/1.0.0/datapoints-map.less) and paste it at /cumulocity-app/branding/
+4. Copy datapoints-map.less file [from here](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/2.0.0/datapoints-map.less) and paste it at /cumulocity-app/branding/
 
 
     **Note:** If you don't find branding folder then please follow [Cumulocity Branding](https://cumulocity.com/guides/web/angular/#branding)
