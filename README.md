@@ -4,6 +4,13 @@
 
   
 The Data Points Map widget help you to display measurements and device locations on map.
+
+### Please choose Data Points Map release based on Cumuloicty/Application builder version:
+
+|APPLICATION BUILDER | CUMULOCITY | DATA POINTS MAP WIDGET |
+|--------------------|------------|------------------------|
+| 1.3.x              | >= 1011.x.x| 2.x.x                  |
+| 1.2.x              | 1010.x.x   | 1.x.x                  |  
   
 
 ![](https://user-images.githubusercontent.com/32765455/102481039-2cb8c000-4087-11eb-8000-8fb956bd9294.jpg)
@@ -37,16 +44,14 @@ The Data Points Map widget help you to display measurements and device locations
 **Supported Cumulocity Environments:**
   
 
-*  **App Builder:** Tested with Cumulocity App Builder version 1.2.2.  
+*  **App Builder:** Tested with Cumulocity App Builder version 1.3.0.  
 
-*  **Cockpit Application:** Tested with Cockpit 1006.6.8 with [Patch Fix](https://www.npmjs.com/package/cumulocity-runtime-widget-loader).
-
-  
+ 
 **Requirements:**
 
 * Git
 
-* NodeJS (release builds are currently built with `v12.19.0`)
+* NodeJS (release builds are currently built with `v14.18.0`)
 
 * NPM (Included with NodeJS)
 
@@ -54,7 +59,7 @@ The Data Points Map widget help you to display measurements and device locations
 
 ```
 
-"angular-resize-event": "^1.1.1"
+"angular-resize-event": "^2.1.0"
 
 "fontawesome": "4.7.2"
 
@@ -62,7 +67,7 @@ The Data Points Map widget help you to display measurements and device locations
 
 "leaflet2": "npm:leaflet@^1.6.0"
 
-"@angular/material": "8.2.3"
+"@angular/material": "11.2.13"
 
 "leaflet.markercluster": "^1.4.1
 
@@ -79,7 +84,7 @@ The Data Points Map widget help you to display measurements and device locations
 
     ```
 
-    npm i angular-resize-event@1.1.1 fontawesome@4.7.2 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@^1.6.0 @angular/material@8.2.3 leaflet.markercluster@1.4.1
+    npm i angular-resize-event@2.1.0 fontawesome@4.7.2 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@^1.6.0 @angular/material@11.2.13 leaflet.markercluster@1.4.1
 
     ```
 2. Grab the Data Points Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/2.0.0/gp-data-points-map-2.0.0.tgz)**.
@@ -156,100 +161,6 @@ The Data Points Map widget help you to display measurements and device locations
     ```
   
 
-**Installation Steps For Cockpit:**
-  
-
-**Note:** If you are new to Cockpit or not yet created any cockpit application then please follow [Web SDK for Angular](https://cumulocity.com/guides/web/angular/) before proceeding further.
-
-
-1. Open Your existing Cockpit/Cumulocity project and install external dependencies by executing below command or install it manually.
-
-    ```
-
-    npm i angular-resize-event@1.1.1 fontawesome@4.7.2 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@^1.6.0 @angular/material@8.2.3 leaflet.markercluster@1.4.1
-
-    ```
-
-2. Grab the Data Points Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/2.0.0/gp-data-points-map-2.0.0.tgz)**
-
-3. Install the Binary file in your project.
-
-    ``` 
-
-    npm i <binary file path>/gp-data-points-map-x.x.x.tgz
-
-    ```
-
-4. Copy datapoints-map.less file [from here](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/2.0.0/datapoints-map.less) and paste it at /cumulocity-app/branding/
-
-
-    **Note:** If you don't find branding folder then please follow [Cumulocity Branding](https://cumulocity.com/guides/web/angular/#branding)
-
-5. Open branding.less located at /cumulocity-app/branding/
-
-6. Update branding.less file with below Material theme. Import at first line/begining of file(Please ignore this step if it already exist).
-
-    ```
-    @import '~@angular/material/prebuilt-themes/indigo-pink.css';  
-
-    ```
-
-7. Update branding.less file with below datapoints-map.less. Import at last line/end of file.
-
-    ```
-
-    @import  'datapoints-map.less';
-
-    ```
-
-8. Import GpDataPointsMapModule in app.module.ts file located at /cumulocity-app/
-
-    ```
-
-    import {GpDataPointsMapModule} from  'gp-data-points-map';
-
-    @NgModule({
-
-    imports: [
-
-
-    GpDataPointsMapModule
-    
-
-    ]
-
-    })
-
-
-    ```
-
-9. Congratulation! Installation is now completed. Now you can run your app locally or build and deploy it into your tenant.
-
-    ```
-
-    //Start App Builder
-
-    
-
-    npm run start
-
-    
-
-    // Build App
-
-    
-
-    npm run build
-
-
-    // Deploy App
-
-    
-
-    npm run deploy
-
-
-    ```
 
 ## Build Instructions
 
@@ -259,7 +170,7 @@ The Data Points Map widget help you to display measurements and device locations
   
 * Git  
 
-* NodeJS (release builds are currently built with `v12.19.0`)
+* NodeJS (release builds are currently built with `v14.18.0`)
   
 
 * NPM (Included with NodeJS)
