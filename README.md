@@ -5,7 +5,7 @@
   
 The Data Points Map widget help you to display measurements and device locations on map.
 
-### Please choose Data Points Map release based on Cumuloicty/Application builder version:
+### Please choose Data Points Map release based on Cumulocity/Application builder version:
 
 |APPLICATION BUILDER | CUMULOCITY | DATA POINTS MAP WIDGET |
 |--------------------|------------|------------------------|
@@ -38,7 +38,7 @@ The Data Points Map widget help you to display measurements and device locations
 * This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-data-points-map-widget/releases/download/2.0.0/datapoints-map-runtime-widget-2.0.0.zip) and use application builder to install your runtime widget.
   
 
-### Installation of widget through Appbuilder or Cockipt Deployment?
+### Installation of widget through Appbuilder?
   
 
 **Supported Cumulocity Environments:**
