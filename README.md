@@ -16,7 +16,6 @@ The Data Points Map widget help you to display measurements and device locations
 ![](https://user-images.githubusercontent.com/32765455/102481039-2cb8c000-4087-11eb-8000-8fb956bd9294.jpg)
 
 ## Features
-
   
 *  **Data Points:** Display measurements in terms of data points on map across geographical location.
 
