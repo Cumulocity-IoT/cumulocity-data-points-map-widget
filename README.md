@@ -5,6 +5,8 @@
   
 The Data Points Map widget help you to display measurements and device locations on map.
 
+ ### ⚠️ This project is no longer under development. Please use [cumulocity-data-points-map-widget-plugin](https://github.com/SoftwareAG/cumulocity-data-points-map-widget-plugin) for Application Builder >=2.x.x and Cumulocity >=1016.x.x⚠️
+
 ### Please choose Data Points Map release based on Cumulocity/Application builder version:
 
 |APPLICATION BUILDER | CUMULOCITY | DATA POINTS MAP WIDGET |
